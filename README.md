@@ -8,7 +8,7 @@
 </h4>
 
 <p align="center" >
-    <a href="https://repl.it/github/ayushdeveloper001/Secktor-Md">
+    <a href="https://repl.it/github/ayushdeveloper001/Ayush-MD">
     <img src="https://i.ibb.co/zrB5kMh/deploy-on-repl.jpg" width="170px" alt="Deploy on Heroku" >
     </a>
     <br>     
