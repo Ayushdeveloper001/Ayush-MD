@@ -3,12 +3,9 @@ const axios = require("axios");
 const path = require("path");
 let mergedCommands = [
   "help",
-  "h",
   "menu",
-  "sc",
-  "repo",
-  "git",
-  "script",
+  "owner",
+  "ayush",
 ];
 
 module.exports = {
