@@ -2,12 +2,9 @@
  
  
  # 💙 Ayush MD
-<summary>Click to choose your favourite platform to Deploy</summary>
- 
-<br><br> 
  
     
-<h4 align="center"> Deploy on Repl.it - ( Highly Recommended )
+<h4 align="center"> Deploy on Repl.it
 </h4>
 
 <p align="center" >
