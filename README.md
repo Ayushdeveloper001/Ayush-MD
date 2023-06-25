@@ -1,4 +1,4 @@
-<h1 align="center"> Ayush MD
+
  
  
  # 💙 Ayush MD
