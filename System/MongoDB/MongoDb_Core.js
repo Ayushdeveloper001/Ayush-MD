@@ -5,87 +5,6 @@ const {
   pluginData,
 } = require("../MongoDB/MongoDB_Schema.js");
 const mongoose = require("mongoose");
-// BAN USER
-async function banUser(userId) {
-  const user = await userData.findOne({ id: userId });
-  if (!user) {
-    await userData.create({ id: userId, ban: true });
-    return;
-  }
-  if (user.ban) {
-    return;
-  }
-  await userData.findOneAndUpdate({ id: userId }, { $set: { ban: true } });
-}
-
-// CHECK BAN STATUS
-async function checkBan(userId) {
-  const user = await userData.findOne({ id: userId });
-  if (!user) {
-    return false;
-  }
-  return user.ban;
-}
-
-// UNBAN USER
-async function unbanUser(userId) {
-  const user = await userData.findOne({ id: userId });
-  if (!user) {
-    await userData.create({ id: userId, ban: false });
-    return;
-  }
-  if (!user.ban) {
-    return;
-  }
-  await userData.findOneAndUpdate({ id: userId }, { $set: { ban: false } });
-}
-
-// ADD MOD
-async function addMod(userId) {
-  const ownerlist = global.owner;
-  if (ownerlist.includes(userId)) {
-    return;
-  }
-  const user = await userData.findOne({ id: userId });
-  if (!user) {
-    await userData.create({ id: userId, addedMods: true });
-    return;
-  }
-  if (user.addedMods) {
-    return;
-  }
-  await userData.findOneAndUpdate({ id: userId },{ $set: { addedMods: true } });
-}
-
-// CHECK MOD STATUS
-async function checkMod(userId) {
-  const ownerlist = global.owner;
-  if (ownerlist.includes(userId)) {
-    return true;
-  }
-  const user = await userData.findOne({ id: userId });
-  if (!user) {
-    return false;
-  }
-  return user.addedMods;
-}
-
-// DEL MOD
-async function delMod(userId) {
-  const ownerlist = global.owner;
-  if (ownerlist.includes(userId)) {
-    return;
-  }
-  const user = await userData.findOne({ id: userId });
-  if (!user) {
-    await userData.create({ id: userId, addedMods: false });
-    return;
-  }
-  if (!user.addedMods) {
-    return;
-  }
-  await userData.findOneAndUpdate({ id: userId }, { $set: { addedMods: false } });
-}
 
 // SET CHAR ID
 async function setChar(charId) {
@@ -246,62 +165,6 @@ async function delGroupChatbot(groupID) {
   await groupData.findOneAndUpdate({ id: groupID }, { $set: { chatBot: false } });
 }
 
-// SET BOT MODE
-async function setBotMode(mode) {
-  const selectedMode = await systemData.findOne({ id: "1" });
-  if (!selectedMode) {
-    await systemData.create({ id: "1", botMode: mode });
-    return;
-  }
-  if (selectedMode.botMode == mode) {
-    return;
-  }
-  await systemData.findOneAndUpdate({ id: "1" }, { $set: { botMode: mode } });
-}
-
-// GET BOT MODE
-async function getBotMode() {
-  const selectedMode = await systemData.findOne({ id: "1" });
-  if (!selectedMode) {
-    return "public";
-  }
-  return selectedMode.botMode;
-}
-
-// BAN GROUP
-async function banGroup(groupID) {
-  const group = await groupData.findOne({ id: groupID });
-  if (!group) {
-    await groupData.create({ id: groupID, bangroup: true });
-    return;
-  }
-  if (group.bangroup) {
-    return;
-  }
-  await groupData.findOneAndUpdate({ id: groupID }, { $set: { bangroup: true } });
-}
-
-// CHECK BAN GROUP STATUS
-async function checkBanGroup(groupID) {
-  const group = await groupData.findOne({ id: groupID });
-  if (!group) {
-    return false;
-  }
-  return group.bangroup;
-}
-
-// UNBAN GROUP
-async function unbanGroup(groupID) {
-  const group = await groupData.findOne({ id: groupID });
-  if (!group) {
-    await groupData.create({ id: groupID, bangroup: false });
-    return;
-  }
-  if (!group.bangroup) {
-    return;
-  }
-  await groupData.findOneAndUpdate({ id: groupID }, { $set: { bangroup: false } });
-}
 
 /*// PUSH NEW INSTALLED PLUGIN IN DATABASE
 async function pushPlugin(newPlugin, url) {
@@ -330,62 +193,15 @@ async function delPlugin(pluginName) {
   await pluginsCollection.deleteOne({ plugin: pluginName });
 }*/
 
-// PUSH NEW INSTALLED PLUGIN IN DATABASE
-async function pushPlugin(newPlugin, url) {
-  const plugin = new pluginData({
-    plugin: newPlugin,
-    url: url,
-  });
-  await plugin.save();
-}
-
-
-// Check if plugin is installed
-async function isPluginPresent(pluginName) {
-  const plugin = await pluginData.findOne({ plugin: pluginName });
-  return !!plugin;
-}
-
-// DELETE A PLUGIN FROM THE DATABASE
-async function delPlugin(pluginName) {
-  const plugin = await pluginData.findOne({ plugin: pluginName });
-  if (!plugin) {
-    throw new Error("The plugin is not present in the database.");
-  }
-  await pluginData.deleteOne({ plugin: pluginName });
-}
-
-// Get all installed plugin URLs as an array
-async function getPluginURLs() {
-  const plugins = await pluginData.find({}, 'url');
-  const urls = plugins.map(plugin => plugin.url);
-  return urls;
-}
-
-// Getting all plugins as an array
-async function getAllPlugins() {
-  const plugins = await pluginData.find({}, { plugin: 1, url: 1 });
-  return plugins;
-}
-
 
 
 // Exporting the functions
 module.exports = {
-  banUser, //----------------------- BAN
-  checkBan, // --------------------- CHECK BAN STATUS
-  unbanUser, // -------------------- UNBAN
-  addMod, // ----------------------- ADD MOD
-  checkMod, // --------------------- CHECK MOD STATUS
-  delMod, // ----------------------- DEL MOD
   setChar, // ---------------------- SET CHAR ID
   getChar, // ---------------------- GET CHAR ID
   activateChatBot, // -------------- ACTIVATE PM CHATBOT
   checkPmChatbot, // --------------- CHECK PM CHATBOT STATUS
   deactivateChatBot, // ------------ DEACTIVATE PM CHATBOT
-  pushPlugin, // ------------------- PUSH NEW INSTALLED PLUGIN IN DATABASE
-  isPluginPresent, // -------------- Check if plugin is installed
-  delPlugin, // -------------------- DELETE A PLUGIN FROM THE DATABASE
   setWelcome, // ------------------- SET WELCOME MESSAGE
   checkWelcome, // ----------------- CHECK WELCOME MESSAGE STATUS
   delWelcome, // ------------------- DELETE WELCOME MESSAGE
@@ -395,11 +211,4 @@ module.exports = {
   setGroupChatbot, // -------------- SET GROUP CHATBOT
   checkGroupChatbot, // ------------ CHECK GROUP CHATBOT STATUS
   delGroupChatbot, // -------------- DELETE GROUP CHATBOT
-  setBotMode, // ------------------- SET BOT MODE
-  getBotMode, // ------------------- GET BOT MODE
-  banGroup, // --------------------- BAN GROUP
-  checkBanGroup, //----------------- CHECK BAN STATUS OF A GROUP
-  unbanGroup, // ------------------- UNBAN GROUP
-  getPluginURLs, // ---------------- Get all installed plugin URLs as an array
-  getAllPlugins, // ---------------- Getting all plugins as an array
 };

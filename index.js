@@ -60,7 +60,7 @@ const startAtlas = async () => {
 
   const { saveState, state, clearState } = await getAuthFromDatabase();
   console.log(
-    figlet.textSync("ATLAS", {
+    figlet.textSync("AYUSH", {
       font: "Standard",
       horizontalLayout: "default",
       vertivalLayout: "default",
@@ -77,7 +77,7 @@ const startAtlas = async () => {
   const Atlas = atlasConnect({
     logger: pino({ level: "silent" }),
     printQRInTerminal: true,
-    browser: ["Atlas", "Safari", "1.0.0"],
+    browser: ["Ayush MD", "Safari", "1.0.0"],
     auth: state,
     version,
   });
@@ -102,7 +102,7 @@ const startAtlas = async () => {
 
     if (!plugins.length || plugins.length == 0) {
       console.log(
-        chalk.redBright("No Extra Plugins Installed ! Starting Atlas...\n")
+        chalk.redBright("No Extra Plugins Installed ! Starting Ayush MD...\n")
       );
     } else {
       console.log(
@@ -125,7 +125,7 @@ const startAtlas = async () => {
       }
       console.log(
         chalk.greenBright(
-          "All Plugins Installed Successfully ! Starting Atlas...\n"
+          "All Plugins Installed Successfully ! Starting Ayush Chatbot...\n"
         )
       );
     }
@@ -138,7 +138,7 @@ const startAtlas = async () => {
   Atlas.ev.on("connection.update", async (update) => {
     const { lastDisconnect, connection, qr } = update;
     if (connection) {
-      console.info(`[ ATLAS ] Server Status => ${connection}`);
+      console.info(`[ AYUSH MD ] Server Status => ${connection}`);
     }
 
     if (connection === "close") {

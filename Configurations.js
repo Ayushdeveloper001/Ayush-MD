@@ -15,6 +15,11 @@ global.packname = process.env.PACKNAME || `Ayush Bot`;
 global.author = process.env.AUTHOR || "Ayush MD";
 global.port = process.env.PORT || "10000";
 global.openAiAPI = process.env.OPENAI_API || "Put your openai API key here";
+global.ayush = process.env.AYUSH || "is a Human";
+global.ayushnum = process.env.AYUSHNUM || "Never Gonna Give You Up";
+global.group1 = process.env.GROUP1 || "Unavailable";
+global.group2 = process.env.GROUP2 || "Unavailable";
+global.insta = process.env.INSTA || "Unavailable";
 global.owner = gg.split(",");
 
 module.exports = {

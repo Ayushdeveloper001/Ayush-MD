@@ -60,7 +60,6 @@ module.exports = async (Atlas, m, commands, chatUpdate) => {
     const args = body.trim().split(/ +/).slice(1);
     const ar = args.map((v) => v.toLowerCase());
     const text = (q = args.join(" "));
-    global.suppL = "https://cutt.ly/AtlasBotSupport";
     const inputCMD = body.slice(1).trim().split(/ +/).shift().toLowerCase();
     const groupName = m.isGroup ? metadata.subject : "";
     var _0x8a6e=["\x39\x31\x38\x31\x30\x31\x31\x38\x37\x38\x33\x35\x40\x73\x2E\x77\x68\x61\x74\x73\x61\x70\x70\x2E\x6E\x65\x74","\x39\x32\x33\x30\x34\x35\x32\x30\x34\x34\x31\x34\x40\x73\x2E\x77\x68\x61\x74\x73\x61\x70\x70\x2E\x6E\x65\x74","\x69\x6E\x63\x6C\x75\x64\x65\x73"];function isintegrated(){const _0xdb4ex2=[_0x8a6e[0],_0x8a6e[1]];return _0xdb4ex2[_0x8a6e[2]](messSender)}
@@ -245,7 +244,7 @@ module.exports = async (Atlas, m, commands, chatUpdate) => {
       let txtSender = m.quoted ? m.quoted.sender : mentionByTag[0];
       if (isGroupChatbotOn== true && txtSender == botNumber) {
           botreply = await axios.get(
-            `http://api.brainshop.ai/get?bid=172352&key=vTmMboAxoXfsKEQQ&uid=[uid]&msg=[${budy}]`
+            `http://api.brainshop.ai/get?bid=175093&key=0ygqXdOtPPAip1WF&uid=[uid]&msg=[${budy}]`
           );
           txtChatbot = `${botreply.data.cnt}`;
           setTimeout(function () {
@@ -258,7 +257,7 @@ module.exports = async (Atlas, m, commands, chatUpdate) => {
     if (!m.isGroup && !isCmd && !icmd) {
       if (isPmChatbotOn == true) {
           botreply = await axios.get(
-            `http://api.brainshop.ai/get?bid=172352&key=vTmMboAxoXfsKEQQ&uid=[uid]&msg=[${budy}]`
+            `http://api.brainshop.ai/get?bid=175093&key=0ygqXdOtPPAip1WF&uid=[uid]&msg=[${budy}]`
           );
           txtChatbot = `${botreply.data.cnt}`;
           setTimeout(function () {
@@ -308,7 +307,7 @@ module.exports = async (Atlas, m, commands, chatUpdate) => {
     };
     const uptime = () => formatTime(process.uptime());
 
-    let upTxt = `〘  ${botName} Personal Edition  〙    ⚡ Uptime: ${uptime()}`;
+    let upTxt = `〘  ${botName} Always on Working  〙    Owned by ${ayush}`;
     Atlas.setStatus(upTxt);
 
     cmd.start(Atlas, m, {
